@@ -1,0 +1,7 @@
+[data-testid='stAppViewContainer'] {
+    background: rgba(0, 0, 0, 0.5); 
+    background-image: url("https://wallpapertag.com/wallpaper/full/8/4/9/608783-cool-gothic-wallpapers-1920x1200-picture.jpg");
+    background-blend-mode: overlay; 
+    background-position: center;
+    background-size: cover;
+}

@@ -1,0 +1,7 @@
+streamlit
+streamlit-option-menu
+sentence-transformers
+pinecone-client
+google.generativeai
+python-dotenv
+pymongo
