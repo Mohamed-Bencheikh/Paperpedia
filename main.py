@@ -1,7 +1,7 @@
 import streamlit as st
 from user import login_signup_dialog
 from app import app
-st.set_page_config(page_title="Paperpedia", page_icon=":paper:")
+st.set_page_config(page_title="Paperpedia", page_icon=":books:")
 styles = "<style>"
 with open("styles.css") as f:
     styles += f.read()

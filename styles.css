@@ -5,3 +5,49 @@
     background-position: center;
     background-size: cover;
 }
+
+.article-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #000000;
+}
+
+.article-header h3 {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.article-meta {
+    color: #666;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.article-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.article-actions .btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    text-decoration: none;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.article-actions .btn:hover {
+    background-color: #0056b3;
+}
+
+.emoji {
+    margin-right: 5px;
+}
