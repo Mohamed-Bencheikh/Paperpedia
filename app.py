@@ -1,13 +1,13 @@
 # Streamlit app script
 import streamlit as st
 from streamlit_option_menu import option_menu
-from recommend import get_latest_papers, get_relevant_passage
+from recommend import get_latest_papers, get_relevant_passage, get_chat_response
 # Main application code
 def app():
         st.title(f"Welcome  {st.session_state.user['fullname']} :)")
         cols = st.columns([1,4.5,1])
         with cols[0]:
-            st.toggle("Chat")
+            chat = st.toggle("Chat")
         with cols[1]:
             query = st.text_input('Search here', placeholder="Describe what you're looking for", label_visibility="collapsed")
         with cols[2]:
@@ -15,7 +15,10 @@ def app():
         with st.container():
             if btn and query:
                 with st.spinner('Searching...'):
-                    display_search_results(query)
+                    if chat:
+                        st.write("Chat")
+                    else:
+                        display_search_results(query)
             tabs = st.tabs(['Latest', 'Trending', 'Recommended'])
             with tabs[0]:
                 display_latest_papers()
@@ -69,4 +72,11 @@ def display_search_results(query):
                 </div>""", unsafe_allow_html=True
                 )
 
+def display_chat_response(query):
+    with st.chat_message(name='user'):
+        st.write(query)
+    with st.chat_message(name='bot'):
+        with st.spinner('...'):
+            response = get_chat_response(query)
+            st.markdown(response)
 

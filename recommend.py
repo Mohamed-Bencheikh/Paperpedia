@@ -3,6 +3,7 @@ from pinecone import Pinecone
 import google.generativeai as genai
 import arxiv
 from config import pc_api_key, g_api_key
+import textwrap
 import warnings
 
 warnings.filterwarnings("ignore")
@@ -44,4 +45,32 @@ def get_latest_papers(category, num_papers=5):
             "url": res.pdf_url
         })
     return papers
+
+def make_prompt(query, relevant_passage):
+  escaped = relevant_passage.replace("'", "").replace('"', "").replace("\n", " ")
+  prompt = textwrap.dedent(f"""You are a helpful Recommender System that recommend research papers from the list of articles proposed in the context below. \
+  Be sure to suggest the most relevant one based on the QUERY, including all relevant background information. \
+  Your response should look like this:\
+  I recommend this article:\
+  TITLE: the title of the article\
+  URL: the url of the article\
+  Reason: your reasoning for the recommendation\
+  If the passage is irrelevant to the answer, you may ignore it.
+  QUESTION: '{query}'
+  PASSAGE: '{escaped}'
+  ANSWER:
+  """)
+  return prompt
+
+def get_chat_response(query):
+  context = get_relevant_passage(query)
+  passage = ""
+  for i, res in enumerate(context):
+    passage += f"result {i+1}:\n"
+    passage += f"Title: {res['title']}\n"
+    passage += f"Url: {res['url']}\n"
+  prompt = make_prompt(query, passage)
+  q_a_model = genai.GenerativeModel('gemini-1.5-pro-latest')
+  response = q_a_model.generate_content(prompt)
+  return response
 
