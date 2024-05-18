@@ -5,3 +5,4 @@ pinecone-client
 google.generativeai
 python-dotenv
 pymongo
+arxiv
