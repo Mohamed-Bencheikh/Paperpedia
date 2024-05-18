@@ -1,6 +1,8 @@
 import streamlit as st
 from user import login_signup_dialog
 from app import app
+from about import description
+
 st.set_page_config(page_title="Paperpedia", page_icon=":books:")
 styles = "<style>"
 with open("styles.css") as f:
@@ -25,3 +27,6 @@ elif st.session_state.page == "login":
 
 elif st.session_state.page == "app":
     app()
+
+elif st.session_state.page == "about":
+    description()

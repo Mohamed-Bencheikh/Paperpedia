@@ -7,11 +7,24 @@ import warnings
 
 warnings.filterwarnings("ignore")
 
-embed_model = "all-mpnet-base-v2"
-genai.configure(api_key=pc_api_key)
+embedding_model = SentenceTransformer("all-mpnet-base-v2") 
+genai.configure(api_key=g_api_key)
 pc = Pinecone(api_key=pc_api_key)
+index = pc.Index("papers")
 
-def get_latest_papers(category, num_papers=3):
+## RELEVANT PASSAGE
+def get_relevant_passage(query, top_k=5):
+    results = []
+    q_emb = embedding_model.encode(query)
+    res = index.query(vector=q_emb.tolist(), top_k=top_k, include_metadata=True).to_dict()
+    ## get the titles and the urls
+    for r in res['matches']:
+        title = r['metadata']['title']
+        url = r['metadata']['url']
+        results.append({'title': title, 'url': url})
+    return results 
+   
+def get_latest_papers(category, num_papers=5):
     search = arxiv.Search(
     query=category,
     max_results=num_papers,
@@ -24,7 +37,7 @@ def get_latest_papers(category, num_papers=3):
         papers.append({
             "title": res.title,
             "authors": [author.name for author in res.authors],
-            "date": res.published.strftime("%d %m %Y"),
+            "date": res.published.strftime("%m %Y"),
             "abstract": res.summary,
             "categories": res.categories,
             "journal": res.journal_ref,
@@ -33,5 +46,5 @@ def get_latest_papers(category, num_papers=3):
     return papers
 
 
-
-
+query = "the use of deep learning in computer vision"
+print(get_relevant_passage(query))
