@@ -28,7 +28,7 @@ def description():
 
 
     st.markdown("""
-    <div style="width: 640px; height: 480px; margin: 10px; position: relative;">
+    <div style="width: 700px; height: 480px; margin: 10px; position: relative;">
         <iframe allowfullscreen frameborder="0" style="width:640px; height:480px" src="https://lucid.app/documents/embedded/c681383a-f2f7-479b-9be9-60e815525a2c" id="AF7CBCR5hu9B">
     </iframe></div>
     """, unsafe_allow_html=True)

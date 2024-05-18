@@ -37,7 +37,7 @@ def get_latest_papers(category, num_papers=5):
         papers.append({
             "title": res.title,
             "authors": [author.name for author in res.authors],
-            "date": res.published.strftime("%m %Y"),
+            "date": res.published.strftime("%d-%m-%Y"),
             "abstract": res.summary,
             "categories": res.categories,
             "journal": res.journal_ref,
@@ -45,6 +45,3 @@ def get_latest_papers(category, num_papers=5):
         })
     return papers
 
-
-query = "the use of deep learning in computer vision"
-print(get_relevant_passage(query))

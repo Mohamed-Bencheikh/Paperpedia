@@ -6,7 +6,7 @@
     background-size: cover;
 }
 
-.article-container {
+#article-container {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
@@ -14,14 +14,14 @@
     background-color: #000000;
 }
 
-.article-header h3 {
+#article-header h5 {
     margin-top: 0;
     display: flex;
     align-items: center;
     font-size: 18px;
 }
 
-.article-meta {
+#article-meta {
     color: #666;
     font-size: 14px;
     margin-top: 5px;

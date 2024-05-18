@@ -2,6 +2,7 @@ import streamlit as st
 from user import login_signup_dialog
 from app import app
 from about import description
+from uprofile import profile
 
 st.set_page_config(page_title="Paperpedia", page_icon=":books:")
 styles = "<style>"
@@ -30,3 +31,6 @@ elif st.session_state.page == "app":
 
 elif st.session_state.page == "about":
     description()
+
+elif st.session_state.page == "profile":
+    profile()
