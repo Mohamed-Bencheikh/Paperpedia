@@ -1,5 +1,7 @@
 [data-testid='stAppViewContainer'] {
-    background: rgba(0, 0, 0, 0.5); 
+    background: #000000; 
+    /* https://wallpapertag.com/wallpaper/full/8/4/9/608783-cool-gothic-wallpapers-1920x1200-picture.jpg */
+    /* background-image: url("https://www.lotus-qa.com/wp-content/uploads/2021/10/Background.png"); */
     background-image: url("https://wallpapertag.com/wallpaper/full/8/4/9/608783-cool-gothic-wallpapers-1920x1200-picture.jpg");
     background-blend-mode: overlay; 
     background-position: center;

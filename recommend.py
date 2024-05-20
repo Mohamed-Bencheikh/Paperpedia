@@ -72,5 +72,7 @@ def get_chat_response(query):
   prompt = make_prompt(query, passage)
   q_a_model = genai.GenerativeModel('gemini-1.5-pro-latest')
   response = q_a_model.generate_content(prompt)
-  return response
+  return response.text
+
+# print(get_chat_response("What are the metrics used in clustering?"))
 
