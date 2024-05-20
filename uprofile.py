@@ -1,17 +1,13 @@
 import streamlit as st
 import database as db
+import pandas as pd
 import time
 @st.experimental_dialog("Profile")
 def profile():
     st.write("Tell more about yourself")
     role = st.selectbox("Role", ["Student", "Researcher", "Engineer", "Other"])
-    
-    categories = {
-    "Computer Science": ["Machine Learning", "Web Development", "Artificial Intelligence", "Data Science", "Cybersecurity"],
-    "Business": ["Accounting", "Marketing", "Project Management", "Entrepreneurship"],
-    "Health": ["Nutrition", "Fitness", "Mental Health", "Pharmacy"],
-    "Entertainment": ["Movies", "Music", "Gaming", "Literature"]
-    }
+    df = pd.read_csv('arxiv_categories.csv')
+    categories = df.groupby('Category')['Subcategory name'].apply(list).to_dict()   
     field = st.selectbox("Field", list(categories.keys()))
     subfield = st.multiselect("Subfield", categories[field])
     interests = st.multiselect("Interests", ["Healthcare", "Education", "Entertainement", "Business", "Technology"])
