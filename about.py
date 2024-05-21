@@ -2,8 +2,12 @@ import streamlit as st
 
 def description():
     if st.button(":house:"):
-        st.session_state.page = "app"
-        st.rerun()
+        if 'user' in st.session_state:
+            st.session_state.page = "app"
+            st.rerun()
+        else:
+            st.session_state.page = "home"
+            st.rerun()
     st.markdown(
         """
         ## About

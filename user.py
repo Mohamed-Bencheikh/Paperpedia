@@ -24,8 +24,8 @@ def signup():
                 user = db.create_user(fullname, email, password)
                 st.success("Signed up.")
                 time.sleep(1)
-                st.session_state.user = user
-                st.session_state.page = "app"
+                st.session_state.user = db.fetch_user({"email": email, "password": password})
+                st.session_state.page = "profile"
                 st.rerun()
             except Exception as e:
                 st.error(str(e))

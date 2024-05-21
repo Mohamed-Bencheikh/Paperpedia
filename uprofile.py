@@ -9,7 +9,8 @@ def profile():
     df = pd.read_csv('arxiv_categories.csv')
     categories = df.groupby('Category')['Subcategory name'].apply(list).to_dict()   
     field = st.selectbox("Field", list(categories.keys()))
-    subfield = st.multiselect("Subfield", categories[field])
+    subfields = st.multiselect("Subfield", categories[field])
+    sub_abrvs = df[df['Subcategory name'].isin(subfields)]['subcategory abrv'].tolist()
     interests = st.multiselect("Interests", ["Healthcare", "Education", "Entertainement", "Business", "Technology"])
     cols = st.columns(2)
     with cols[0]:
@@ -18,7 +19,7 @@ def profile():
             data = {
                 "role": role,
                 "field": field,
-                "subfield": subfield,
+                "subfields": sub_abrvs,
                 "interests": interests
             }
             try:
