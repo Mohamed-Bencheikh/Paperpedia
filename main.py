@@ -6,7 +6,8 @@ from home import home
 from about import description
 from uprofile import profile
    
-st.set_page_config(page_title="Paperpedia", page_icon=":books:")
+
+st.set_page_config(page_title="Paperpedia", page_icon="image.png")
 
 styles = "<style>"
 with open("styles.css") as f:

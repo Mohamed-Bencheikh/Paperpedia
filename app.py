@@ -12,6 +12,7 @@ def display_latest_papers():
     for res in results:
         st.markdown(
             f"""
+            <hr>
             <div id="paper-container">
                 <div id="paper-header" >
                     <h5><span class="emoji">📄</span> {res['title']}</h5>
@@ -25,6 +26,35 @@ def display_latest_papers():
             """,
             unsafe_allow_html=True
         )
+        with st.expander("Abstract"):
+            st.write(res['abstract'])
+        btns = st.columns([1,1])
+        with btns[0]:
+            st.link_button('View', url=res['url'])
+        with btns[1]:
+            if st.button('Details', type='primary', key=res['authors'][0]):
+                if st.button('Back'):
+                    st.session_state.page = "app"
+                    st.rerun()
+                st.markdown(
+            f"""
+            <div id="paper-container">
+                <div id="paper-header" >
+                    <h5><span class="emoji">📄</span> {res['title']}</h5>
+                    <div id="paper-meta">
+                        <p><span class="emoji">✒️</span> {', '.join(res['authors'])}</p>
+                        <p><span class="emoji">📅</span> {res['date']}</p>
+                        <p><span class="emoji">🏷️</span> {', '.join(res['categories'])}</p>
+                        <p><span class="emoji">📰</span> {res['journal']}</p>
+                    </div>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+                st.button('Chat', type='primary')
+        
+            
 
 def display_search_results(query):
     results = get_relevant_passage(query)
