@@ -26,34 +26,13 @@ def display_latest_papers():
             """,
             unsafe_allow_html=True
         )
-        with st.expander("Abstract"):
-            st.write(res['abstract'])
-        btns = st.columns([1,1])
+        btns = st.columns(2)
         with btns[0]:
             st.link_button('View', url=res['url'])
         with btns[1]:
-            if st.button('Details', type='primary', key=res['authors'][0]):
-                if st.button('Back'):
-                    st.session_state.page = "app"
-                    st.rerun()
-                st.markdown(
-            f"""
-            <div id="paper-container">
-                <div id="paper-header" >
-                    <h5><span class="emoji">📄</span> {res['title']}</h5>
-                    <div id="paper-meta">
-                        <p><span class="emoji">✒️</span> {', '.join(res['authors'])}</p>
-                        <p><span class="emoji">📅</span> {res['date']}</p>
-                        <p><span class="emoji">🏷️</span> {', '.join(res['categories'])}</p>
-                        <p><span class="emoji">📰</span> {res['journal']}</p>
-                    </div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-                st.button('Chat', type='primary')
-        
+            if st.button('Details', type='primary', key=res['Id']):
+                st.session_state.paper = res 
+                st.session_state.page = "details"       
             
 
 def display_search_results(query):
@@ -70,12 +49,37 @@ def display_search_results(query):
                 </div>""", unsafe_allow_html=True
                 )
         
+        
 def display_chat_response(query):
     with st.chat_message(name='user'):
         st.write(query)
     with st.chat_message(name='ai'):
         response = get_chat_response(query)
-        st.markdown(response)        
+        st.markdown(response) 
+
+# @st.experimental_dialog(title="Paper Details")
+def display_paper_details(res):
+    cols = st.columns([4,2])
+    with cols[0]:
+        st.markdown(
+            f"""
+            <div id="paper-container">
+                <div id="paper-header">
+                    <h5><span class="emoji">📄</span> {res['title']}</h5>
+                    <div id="paper-meta">
+                        <p><span class="emoji">✒️</span> {', '.join(res['authors'])}</p>
+                        <p><span class="emoji">📅</span> {res['date']}</p>
+                        <p><span class="emoji">🏷️</span> {', '.join(res['categories'])}</p>
+                        <p><span class="emoji">📰</span> {res['journal']}</p>
+                    </div>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+        st.expander("Abstract").write(res['abstract'])
+    with cols[1]:
+        display_search_results(res['title'])
 
 def app():
         cols = st.columns([1,4.5,1])
@@ -101,7 +105,6 @@ def app():
                 st.write("Recommended papers")
             with st.sidebar:
                 st.write(f"**{st.session_state.user['fullname']}**")
-                st.write(f"**{st.session_state.user['role']}**")
                 options = option_menu(None, ["Home", "Profile", "About", "Settings", "Logout"])
                 if options == "Profile":
                     st.session_state.page = "profile"

@@ -39,6 +39,8 @@ def get_latest_papers(category, num_papers=5):
             "title": res.title,
             "authors": [author.name for author in res.authors],
             "date": res.published.strftime("%d-%m-%Y"),
+            "Id": res.entry_id,
+            "Doi": res.doi,
             "abstract": res.summary,
             "categories": res.categories,
             "journal": res.journal_ref,

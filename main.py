@@ -1,11 +1,10 @@
 import streamlit as st
-from streamlit_extras.colored_header import colored_header
 from user import login_signup_dialog
 from app import app
 from home import home
 from about import description
 from uprofile import profile
-   
+from details import display_paper_details
 
 st.set_page_config(page_title="Paperpedia", page_icon="image.png")
 
@@ -33,3 +32,6 @@ elif st.session_state.page == "about":
 
 elif st.session_state.page == "profile":
     profile()
+
+elif st.session_state.page == "details":
+    display_paper_details(st.session_state.paper)

@@ -5,16 +5,15 @@ class PaperBasic(BaseModel):
     """Basic information about a paper."""
     title: str
     authors: List[str]
-    publication_date: Optional[str]
-    id: str
+    date: Optional[str]
     url: str
     categories: List[str]
 
 class PaperDetailed(PaperBasic):
     """Detailed information about a paper."""
     abstract: Optional[str]
-    keywords: Optional[List[str]]
-    citation_count: Optional[int]
+    id: Optional[str]
+    links: Optional[List[str]]
     doi: Optional[str]
-    journal: str
-    references: Optional[List[str]]
+    journal: Optional[str]
+    comment: Optional[str]
