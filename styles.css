@@ -1,5 +1,5 @@
 [data-testid='stAppViewContainer'], [data-testid='stHeader']{
-    background: linear-gradient(50deg, #fdb88d 0%, #ffeaba 60%, #ffffff 100%); 
+    /* background: linear-gradient(50deg, #fdb88d 0%, #ffeaba 60%, #ffffff 100%);  */
     color:#000000;
     /* https://wallpapertag.com/wallpaper/full/8/4/9/608783-cool-gothic-wallpapers-1920x1200-picture.jpg */
     background-image: url("https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/itCjTBE/blue-moving-flowing-abstract-waves-on-white-background-blurred-smooth-graphic-motion-design-video-animation-1920x1080_vhhueydte_thumbnail-1080_01.png");
@@ -9,34 +9,39 @@
     background-size: cover;
 }
 
-#article-container {
+.home-list{
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+.paper-container {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
-    background-color: #000000;
+    /* background: linear-gradient(50deg, #fdb88d 0%, #ffeaba 60%, #ffffff 100%); */
+    background-image: url("https://jooinn.com/images/dotted-background-pattern-25.jpg");
 }
 
-#article-header h5 {
+.paper-header h5 {
     margin-top: 0;
     display: flex;
     align-items: center;
     font-size: 18px;
 }
 
-#article-meta {
+.paper-meta {
     color: #666;
     font-size: 14px;
     margin-top: 5px;
 }
 
-.article-actions {
+.paper-actions {
     display: flex;
     justify-content: flex-end;
     margin-top: 10px;
 }
 
-.article-actions .btn {
+.paper-actions .btn {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -47,7 +52,7 @@
     cursor: pointer;
 }
 
-.article-actions .btn:hover {
+.paper-actions .btn:hover {
     background-color: #0056b3;
 }
 

@@ -1,7 +1,10 @@
 import streamlit as st
 from app import display_search_results
 def display_paper_details(res):
-    cols = st.columns([4,2])
+    if st.button("Back"):
+        st.session_state.page = "app"
+        st.rerun()
+    cols = st.columns([4,3])
     with cols[0]:
         st.markdown(
             f"""
@@ -19,6 +22,6 @@ def display_paper_details(res):
             """,
             unsafe_allow_html=True
         )
-        st.expander("Abstract").write(res['abstract'])
+        st.expander("Abstract").markdown(res['abstract'])
     with cols[1]:
         display_search_results(res['title'])

@@ -6,7 +6,12 @@ from about import description
 from uprofile import profile
 from details import display_paper_details
 
-st.set_page_config(page_title="Paperpedia", page_icon="image.png")
+st.set_page_config(page_title="Paperpedia", page_icon="media/image.png")
+header = st.columns([1, 5])
+with header[0]:
+        st.image("media/image.png")
+with header[1]:
+        st.title("Paperpedia")
 
 styles = "<style>"
 with open("styles.css") as f:

@@ -13,10 +13,10 @@ def display_latest_papers():
         st.markdown(
             f"""
             <hr>
-            <div id="paper-container">
-                <div id="paper-header" >
+            <div class="paper-container">
+                <div class="paper-header" >
                     <h5><span class="emoji">📄</span> {res['title']}</h5>
-                    <div id="paper-meta">
+                    <div class="paper-meta">
                         <p><span class="emoji">✒️</span> {', '.join(res['authors'])}</p>
                         <p><span class="emoji">📅</span> {res['date']}</p>
                         <p><span class="emoji">🏷️</span> {', '.join(res['categories'])}</p>
@@ -26,13 +26,13 @@ def display_latest_papers():
             """,
             unsafe_allow_html=True
         )
-        btns = st.columns(2)
+        btns = st.columns([.7,5.2])
         with btns[0]:
-            st.link_button('View', url=res['url'])
-        with btns[1]:
             if st.button('Details', type='primary', key=res['Id']):
                 st.session_state.paper = res 
                 st.session_state.page = "details"       
+        with btns[1]:
+            st.link_button('View', url=res['url'])
             
 
 def display_search_results(query):
@@ -44,7 +44,7 @@ def display_search_results(query):
                 <div class="paper-header">
                     <h5><span class="emoji">📄</span> {res['title']}</h5>
                     <div class="paper-meta">
-                        <p><span class="emoji">🔗</span> {res['url']}</p>
+                        <a href="{res['url']}"><span class="emoji">Open</span>
                     </div>
                 </div>""", unsafe_allow_html=True
                 )
