@@ -2,8 +2,7 @@ import streamlit as st
 from streamlit_card import card
 def home():
         
-                # st.markdown("<h5>A Recommender System for Research Papers</h5>", unsafe_allow_html=True)
-        # with header[2]:
+        st.markdown("<h5>A Recommender System for Research Papers</h5>", unsafe_allow_html=True)
         body = st.columns([3.5, 2.5])
         with body[0]:
                 st.markdown("""

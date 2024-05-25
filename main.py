@@ -5,11 +5,12 @@ from home import home
 from about import description
 from uprofile import profile
 from details import display_paper_details
+from chat import display_chat
 
 st.set_page_config(page_title="Paperpedia", page_icon="media/image.png")
 header = st.columns([1, 5])
 with header[0]:
-        st.image("media/image.png")
+        st.image("media/image.png", width=90)
 with header[1]:
         st.title("Paperpedia")
 
@@ -40,3 +41,8 @@ elif st.session_state.page == "profile":
 
 elif st.session_state.page == "details":
     display_paper_details(st.session_state.paper)
+
+elif st.session_state.page == "chat":
+    display_chat(st.session_state.paper["url"])
+    # st.write(st.session_state.paper["Id"])
+    # st.write(st.session_state.paper["url"])

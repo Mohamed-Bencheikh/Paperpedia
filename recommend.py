@@ -44,6 +44,7 @@ def get_latest_papers(category, num_papers=5):
             "abstract": res.summary,
             "categories": res.categories,
             "journal": res.journal_ref,
+            "comment": res.comment,
             "url": res.pdf_url
         })
     return papers
