@@ -13,11 +13,12 @@ genai.configure(api_key=g_api_key)
 pc = Pinecone(api_key=pc_api_key)
 index = pc.Index("papers")
 
+embed_query = lambda query: embedding_model.encode(query)
 ## RELEVANT PASSAGE
 def get_relevant_passage(query, top_k=5):
     results = []
-    q_emb = embedding_model.encode(query)
-    res = index.query(vector=q_emb.tolist(), top_k=top_k, include_metadata=True).to_dict()
+    q_emb = embed_query(query).tolist()
+    res = index.query(vector=q_emb, top_k=top_k, include_metadata=True).to_dict()
     ## get the titles and the urls
     for r in res['matches']:
         title = r['metadata']['title']

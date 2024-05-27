@@ -10,7 +10,8 @@ def home():
                 <li><b>Get recommendations based on your preferences</li>
                 <li><b>Get relevant results for your search</li>
                 <li><b>See detailed paper information</li>
-                <li><b>Discover the latest publications in your field of interest</li>
+                <li><b>Discover the latest publications in your field</li>
+                <li><b>Chat with your paper.</li>
                 </div>
                 """, unsafe_allow_html=True)
                 btns = st.columns([1, 2.6])

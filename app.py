@@ -1,8 +1,9 @@
 # Streamlit app script
 import streamlit as st
 from streamlit_option_menu import option_menu
-from recommend import get_latest_papers, get_relevant_passage, get_chat_response
-
+from recommend import embed_query, get_latest_papers, get_relevant_passage, get_chat_response
+import database as db
+from datetime import datetime
 def display_latest_papers():
     fields = st.session_state.user['subfields']
     results = []
@@ -35,8 +36,8 @@ def display_latest_papers():
             st.link_button('View', url=res['url'])
             
 
-def display_search_results(query):
-    results = get_relevant_passage(query)
+def display_search_results(query, top_k=5):
+    results = get_relevant_passage(query, top_k=top_k)
     for res in results:
         st.markdown(
             f"""
@@ -46,8 +47,7 @@ def display_search_results(query):
                     <div class="paper-meta">
                         <a href="{res['url']}"><span class="emoji">Open</span>
                     </div>
-                </div>""", unsafe_allow_html=True
-                )
+                </div>""", unsafe_allow_html=True)
         
         
 def display_chat_response(query):
@@ -57,16 +57,15 @@ def display_chat_response(query):
         response = get_chat_response(query)
         st.markdown(response) 
 
-# @st.experimental_dialog(title="Paper Details")
 def display_paper_details(res):
     cols = st.columns([4,2])
     with cols[0]:
         st.markdown(
             f"""
-            <div id="paper-container">
-                <div id="paper-header">
+            <div class="paper-container">
+                <div class="paper-header">
                     <h5><span class="emoji">📄</span> {res['title']}</h5>
-                    <div id="paper-meta">
+                    <div class="paper-meta">
                         <p><span class="emoji">✒️</span> {', '.join(res['authors'])}</p>
                         <p><span class="emoji">📅</span> {res['date']}</p>
                         <p><span class="emoji">🏷️</span> {', '.join(res['categories'])}</p>
@@ -81,6 +80,13 @@ def display_paper_details(res):
     with cols[1]:
         display_search_results(res['title'])
 
+def display_history_recommendations():
+    if 'history' in st.session_state.user:
+        history = db.fetch_user({'email':st.session_state.user['email']})['history']
+        for search in history:
+            query = search['query']
+            display_search_results(query, top_k=2)
+
 def app():
         cols = st.columns([1,4.5,1])
         with cols[0]:
@@ -92,19 +98,23 @@ def app():
         with st.container():
             if btn and query:
                 with st.spinner('Searching...'):
+                    # query_embeddings = embed_query(query).tolist()
+                    data = {"query": query, "timestamp": datetime.now()}
+                    db.push_query(st.session_state.user['email'], {'history':data})
                     if chat:
                         display_chat_response(query)
                     else:
                         display_search_results(query)
-            tabs = st.tabs(['Latest', 'Trending', 'Recommended'])
+            tabs = st.tabs(['Recommended', 'Latest', 'Trending'])
             with tabs[0]:
-                display_latest_papers()
+                # st.write("Recommended papers")
+                display_history_recommendations()
             with tabs[1]:
-                st.write("Trending papers")
+                display_latest_papers()
             with tabs[2]:
-                st.write("Recommended papers")
+                st.write("Trending papers")
             with st.sidebar:
-                st.write(f"**{st.session_state.user['fullname']}**")
+                st.markdown(f"**{st.session_state.user['fullname']}**")
                 options = option_menu(None, ["Home", "Profile", "About", "Settings", "Logout"])
                 if options == "Profile":
                     st.session_state.page = "profile"

@@ -53,3 +53,11 @@ def remove_user(data: dict):
         return "User removed!"
     else:
         raise Exception("User not found!")
+    
+def push_query(email: str ,data: dict):
+
+    if users.find_one({"email": email}):
+        users.update_one({"email": email}, {"$push": data})
+        return "Query pushed!"
+    else:
+        raise Exception("User not found!")
