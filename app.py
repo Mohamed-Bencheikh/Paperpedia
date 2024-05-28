@@ -114,7 +114,9 @@ def app():
             with tabs[2]:
                 st.write("Trending papers")
             with st.sidebar:
-                st.markdown(f"**{st.session_state.user['fullname']}**")
+                st.markdown(f"""
+                <img src="https://www.clipartmax.com/png/full/245-2459068_marco-martinangeli-coiffeur-portrait-of-a-man.png" alt="User Profile Picture" class="profile-pic"><b> {st.session_state.user['fullname']}</b>
+                """, unsafe_allow_html=True)
                 options = option_menu(None, ["Home", "Profile", "About", "Settings", "Logout"])
                 if options == "Profile":
                     st.session_state.page = "profile"

@@ -1,13 +1,8 @@
 import streamlit as st
+from utils import return_back
 
 def description():
-    if st.button(":house:"):
-        if 'user' in st.session_state:
-            st.session_state.page = "app"
-            st.rerun()
-        else:
-            st.session_state.page = "home"
-            st.rerun()
+    return_back()    
     st.markdown(
         """
         ## About

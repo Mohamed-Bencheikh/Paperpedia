@@ -1,16 +1,9 @@
 import streamlit as st
 from streamlit_extras.stoggle import stoggle
+from utils import return_back
 from app import display_search_results
 def display_paper_details(res):
-    btns = st.columns([0.8,5.2])
-    with btns[0]:
-        if st.button("Back"):
-            st.session_state.page = "app"
-            st.rerun()
-    with btns[1]:
-        if st.button("Chat", type="primary"):
-            st.session_state.page = "chat"
-            st.rerun()
+    return_back()    
     cols = st.columns([4,3])
     with cols[0]:
         st.markdown(
@@ -30,6 +23,9 @@ def display_paper_details(res):
         )
         # st.expander("Abstract").markdown(res['abstract'])
         stoggle("Abstract", res['abstract'])
+        if st.button("Start a Chat", type="primary", use_container_width=True):
+            st.session_state.page = "chat"
+            st.rerun()
     with cols[1]:
         tabs = st.tabs(['Similar Papers', 'Same Authors', 'Citations'])
         with tabs[0]:

@@ -43,5 +43,5 @@ elif st.session_state.page == "details":
     display_paper_details(st.session_state.paper)
 
 elif st.session_state.page == "chat":
-    display_chat(st.session_state.paper["url"])
+    display_chat(st.session_state.paper)
     

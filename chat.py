@@ -1,6 +1,7 @@
 from langchain_community.document_loaders import PyPDFLoader
-import streamlit as st
 import google.generativeai as genai
+import streamlit as st
+from utils import return_back
 
 def load_paper_content(url):
     loader = PyPDFLoader(url)
@@ -21,13 +22,15 @@ def chat(query, context):
     response = chat_model.generate_content(prompt)  
     return response.text
 
-def display_chat(paper_url):
-    pdf_text = load_paper_content(paper_url)
-    # if len(pdf_text) > 10000:
-    #     st.warning("The document is too long, the chatbot may not work properly.")
+def display_chat(paper):
+    pdf_text = load_paper_content(paper['url'])
+    return_back()
+    if pdf_text:
+        st.info(paper['title'], icon="📄")
     if 'messages' not in st.session_state:
-        st.session_state.messages = [{'role': 'assistant', "content": "Hello "+st.session_state.user['fullname']+"!"}] 
-    user_prompt = st.chat_input("What do you wanna know about the paper?")
+        ufname = st.session_state.user['fullname'].split(" ")[0]
+        st.session_state.messages = [{'role': 'assistant', "content": "Hello "+ufname+" !\nWhat do you wanna know about this paper?"}] 
+    user_prompt = st.chat_input("Your question here...")
     if user_prompt:
         st.session_state.messages.append({'role': 'user', "content": user_prompt})
         with st.spinner("..."):
