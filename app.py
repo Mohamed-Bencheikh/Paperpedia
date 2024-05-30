@@ -5,6 +5,7 @@ from recommend import embed_query, get_latest_papers, get_relevant_passage, get_
 import database as db
 from datetime import datetime
 def display_latest_papers():
+    import random, string
     fields = st.session_state.user['subfields']
     results = []
     for field in fields:
@@ -29,7 +30,8 @@ def display_latest_papers():
         )
         btns = st.columns([.7,5.2])
         with btns[0]:
-            if st.button('Details', type='primary', key=res['Id']):
+            k = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+            if st.button('Details', type='primary', key=k):
                 st.session_state.paper = res 
                 st.session_state.page = "details"       
         with btns[1]:

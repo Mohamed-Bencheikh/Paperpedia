@@ -8,11 +8,9 @@ from details import display_paper_details
 from chat import display_chat
 
 st.set_page_config(page_title="Paperpedia", page_icon="media/image.png")
-header = st.columns([1, 5])
-with header[0]:
-        st.image("media/image.png", width=90)
-with header[1]:
-        st.title("Paperpedia")
+# header = st.columns([1, 5])
+st.logo(image="media/image.png", icon_image="media/image.png")
+st.header("Paperpedia")
 
 styles = "<style>"
 with open("styles.css") as f:
