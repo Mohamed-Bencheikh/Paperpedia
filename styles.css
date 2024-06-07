@@ -25,12 +25,27 @@ h1{
     margin-top: 50px;
     margin-bottom: 40px;
 }
+
+/* __--__--__--__--__--__PAPER CARD__--__--__--__--__--__ */
 .paper-container {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
-    background-image: url("https://jooinn.com/images/dotted-background-pattern-25.jpg");
+    background-image: url("https://3.bp.blogspot.com/-y4k360eR7J8/U7wLHmLK79I/AAAAAAAACgY/P4FckTDkz54/s1600/checker_real_canon18mm_dots_m.png");
+    background-size: cover;
+    background-blend-mode: overlay;
+    background-position: center;
+    display: flex;
+  flex-direction: column;
+  isolation: isolate;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  --gradient: linear-gradient(to bottom, #2eadff, #3d83ff, #7e61ff);
+  --color: #32a6ff;
+    background-color: rgb(222, 224, 235);
+    /* background-image: radial-gradient(rgba(12, 12, 12, 0.171) 2px, transparent 0); */
 }
 
 .paper-header h5 {
@@ -46,26 +61,6 @@ h1{
     margin-top: 5px;
 }
 
-.paper-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
-}
-
-.paper-actions .btn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 6px 10px;
-    text-decoration: none;
-    margin-left: 10px;
-    cursor: pointer;
-}
-
-.paper-actions .btn:hover {
-    background-color: #0056b3;
-}
 
 .emoji {
     margin-right: 5px;
@@ -81,33 +76,19 @@ h1{
 summary{
     margin-bottom: 30px;
 }
-/* ################################# HOME CARDS*/
-.notification {
-    display: flex;
-    flex-direction: column;
-    isolation: isolate;
-    position: relative;
-    width: 18rem;
-    height: 8rem;
-    background: #E5E5E5;
-    border-radius: 1rem;
-    overflow: hidden;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 16px;
-    --gradient: linear-gradient(to bottom, #2eadff, #3d83ff, #7e61ff);
-    --color: #32a6ff
-  }
+
+/* HOME CARDS*/
   
-  .notification:before {
+  .paper-container:before {
     position: absolute;
     content: "";
     inset: 0.0625rem;
     border-radius: 0.9375rem;
-    background: #E5E5E5;
+    /* background: #E5E5E5; */
     z-index: 2
   }
   
-  .notification:after {
+  .paper-container:after {
     position: absolute;
     content: "";
     width: 0.25rem;
@@ -118,85 +99,13 @@ summary{
     z-index: 4;
   }
   
-  .notification:hover:after {
+  .paper-container:hover:after {
     transform: translateX(0.15rem)
   }
   
-  .notititle {
-    color: var(--color);
-    padding: 0.65rem 0.25rem 0.4rem 1.25rem;
-    font-weight: 500;
-    font-size: 1.1rem;
-    transition: transform 300ms ease;
-    z-index: 5;
-  }
-  
-  .notification:hover .notititle {
-    transform: translateX(0.15rem)
-  }
-  
-  .notibody {
-    color: black;
-    font-weight: bold;
-    padding: 0 1.25rem;
-    transition: transform 300ms ease;
-    z-index: 5;
-  }
-  
-  .notification:hover .notibody {
-    transform: translateX(0.25rem)
-  }
-  
-  .notiglow,
-  .notiborderglow {
-    position: absolute;
-    width: 20rem;
-    height: 20rem;
-    transform: translate(-50%, -50%);
-    background: rgb(131,130,152);
-    background: linear-gradient(194deg, rgba(131,130,152,1) 0%, rgba(201,201,231,1) 51%, rgba(255,255,255,1) 100%);
-    /* background: radial-gradient(circle closest-side at center, white, transparent); */
-    opacity: 0;
-    transition: opacity 300ms ease;
-  }
-  
-  .notiglow {
-    z-index: 3;
-  }
-  
-  .notiborderglow {
-    z-index: 1;
-  }
-  
-  .notification:hover .notiglow {
-    opacity: 0.1
-  }
-  
-  .notification:hover .notiborderglow {
-    opacity: 0.1
-  }
-  
-  .note {
-    color: var(--color);
-    position: fixed;
-    top: 80%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    font-size: 0.9rem;
-    width: 75%;
-  }
 
-    .card {
-        display: flex;
-        /* justify-content: space-between; */
-        justify-content: space-evenly;
-        flex-wrap: wrap;
-      } 
+/* __--__--__--__--__--__SOCIAL__--__--__--__--__--__*/
 
-/* ################################# SOCIAL*/
-
-  /* ----- */
   .social-links {
     display: flex;
     justify-content: center;
@@ -224,3 +133,146 @@ summary{
     width: 24px;
     height: 24px;
 }
+
+/* __--__--__--__--__--BOOKMARK--__--__--__--__--__*/
+
+
+.bookmark-checkbox__input {
+  display: none;
+}
+
+.bookmark-checkbox__label {
+  cursor: pointer;
+}
+
+.bookmark-checkbox__icon {
+  width: 1.5em;
+  height: 1.5em;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.3s, fill 0.3s;
+}
+
+.bookmark-checkbox__icon-back {
+  stroke: #333;
+  transition: transform 0.3s;
+}
+
+.bookmark-checkbox__icon-check {
+  stroke: #fff;
+  stroke-dasharray: 16;
+  stroke-dashoffset: 16;
+  transition: stroke-dashoffset 0.3s, transform 0.3s;
+  transform: translateX(2px);
+}
+
+.bookmark-checkbox__input:checked
+  + .bookmark-checkbox__label
+  .bookmark-checkbox__icon {
+  fill: #ff5a5f;
+}
+
+.bookmark-checkbox__input:checked
+  + .bookmark-checkbox__label
+  .bookmark-checkbox__icon-back {
+  stroke: #ff5a5f;
+  transform: scale(1.1);
+  animation: bookmark-pop 0.4s ease;
+}
+
+.bookmark-checkbox__input:checked
+  + .bookmark-checkbox__label
+  .bookmark-checkbox__icon-check {
+  stroke-dashoffset: 0;
+  transition-delay: 0.2s;
+}
+
+@keyframes bookmark-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.bookmark-checkbox {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+} 
+/*
+.bookmark-checkbox__input {
+  display: none;
+}
+
+.bookmark-checkbox__label {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: #f1f1f1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.bookmark-checkbox__label:hover {
+  background-color: #e1e1e1;
+}
+
+.bookmark-checkbox__icon {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: #333;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bookmark-checkbox__icon-back {
+  transition: transform 0.3s;
+}
+
+.bookmark-checkbox__icon-check {
+  stroke: #fff;
+  stroke-dasharray: 16;
+  stroke-dashoffset: 16;
+  transition: stroke-dashoffset 0.3s, transform 0.3s;
+  transform: translateX(2px);
+}*/
+
+.bookmark-checkbox__input:checked + .bookmark-checkbox__label .bookmark-checkbox__icon {
+  fill: #ff5a5f;
+}
+.bookmark-checkbox__input:checked + .bookmark-checkbox__label .bookmark-checkbox__icon-back {
+  stroke: #ff5a5f;
+  transform: scale(1.1);
+  animation: bookmark-pop 0.4s ease;
+  }
+  
+  .bookmark-checkbox__input:checked + .bookmark-checkbox__label .bookmark-checkbox__icon-check {
+    stroke-dashoffset: 0;
+    transition-delay: 0.2s;
+    }
+    /*
+
+@keyframes bookmark-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+} */

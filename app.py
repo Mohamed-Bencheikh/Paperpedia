@@ -2,36 +2,38 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 from recommend import get_latest_papers, get_relevant_passage, get_chat_response
+from utils import display_paper_card
 import database as db
 from datetime import datetime
 def display_latest_papers():
-    import random, string
+    # import random, string
     fields = st.session_state.user['subfields']
     results = []
     for field in fields:
         papers = get_latest_papers(category="cat:"+field)
         results.extend(papers)
     for res in results:
-        st.markdown(
-            f"""
-            <hr>
-            <div class="paper-container">
-                <div class="paper-header" >
-                    <h5><span class="emoji">📄</span> {res['title']}</h5>
-                    <div class="paper-meta">
-                        <p><span class="emoji">✒️</span> {', '.join(res['authors'])}</p>
-                        <p><span class="emoji">📅</span> {res['date']}</p>
-                        <p><span class="emoji">🏷️</span> {', '.join(res['categories'])}</p>
-                    </div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        display_paper_card(res)
+        # st.markdown(
+        #     f"""
+        #     <hr>
+        #     <div class="paper-container">
+        #         <div class="paper-header" >
+        #             <h5><span class="emoji">📄</span> {res['title']}</h5>
+        #             <div class="paper-meta">
+        #                 <p><span class="emoji">✒️</span> {', '.join(res['authors'])}</p>
+        #                 <p><span class="emoji">📅</span> {res['date']}</p>
+        #                 <p><span class="emoji">🏷️</span> {', '.join(res['categories'])}</p>
+        #             </div>
+        #         </div>
+        #     </div>
+        #     """,
+        #     unsafe_allow_html=True
+        # )
         btns = st.columns([.7,5.2])
         with btns[0]:
-            k = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
-            if st.button('Details', type='primary', key=k):
+            # k = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+            if st.button('Details', type='primary', key=res['url']):
                 st.session_state.paper = res 
                 st.session_state.page = "details"       
         with btns[1]:
@@ -123,14 +125,14 @@ def app():
                     display_chat_response(query)
                 else:
                     display_search_results(query)
-        tabs = st.tabs(['Recommended', 'Latest', 'Trending'])
+        tabs = st.tabs(['Recommended', 'Latest', 'Popular'])
         with tabs[0]:
             # st.write("Recommended papers")
             display_history_recommendations()
         with tabs[1]:
             display_latest_papers()
         with tabs[2]:
-            st.write("Trending papers")
+            st.write("Popular papers")
             
 
 

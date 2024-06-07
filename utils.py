@@ -20,10 +20,39 @@ def return_back():
                 else:
                     st.session_state.page = "home"
                 st.rerun()
-def display_paper_card():
-     st.html("""
-    
-""")
+def display_paper_card(paper):
+     st.markdown(
+            f"""
+            <hr>
+    <div class="paper-container">
+    <div class="bookmark-checkbox">
+    <input
+      type="checkbox"
+      id="bookmark-toggle"
+      class="bookmark-checkbox__input"
+    />
+    <label for="bookmark-toggle" class="bookmark-checkbox__label">
+      <svg class="bookmark-checkbox__icon" viewBox="0 0 24 24">
+        <path
+          class="bookmark-checkbox__icon-back"
+          d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
+        ></path>
+        <path class="bookmark-checkbox__icon-check" d="M8 11l3 3 5-5"></path>
+      </svg>
+    </label>
+    </div>
+    <div class="paper-header">
+        <h5><span class="emoji">📄</span> {paper['title']}</h5>
+        <div class="paper-meta">
+        <p><span class="emoji">✒️</span> {', '.join(paper['authors'])}</p>
+        <p><span class="emoji">📅</span> {paper['date']}</p>
+        <p><span class="emoji">🏷️</span> {', '.join(paper['categories'])}</p>
+        </div>
+    </div>
+    </div>
+            """,
+            unsafe_allow_html=True
+        )
 
 def social():
     st.markdown(f"""
