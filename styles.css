@@ -79,14 +79,13 @@ summary{
 
 /* HOME CARDS*/
   
-  .paper-container:before {
+  /* .paper-container:before {
     position: absolute;
     content: "";
     inset: 0.0625rem;
     border-radius: 0.9375rem;
-    /* background: #E5E5E5; */
     z-index: 2
-  }
+  } */
   
   .paper-container:after {
     position: absolute;
@@ -102,111 +101,47 @@ summary{
   .paper-container:hover:after {
     transform: translateX(0.15rem)
   }
-  
 
-/* __--__--__--__--__--__SOCIAL__--__--__--__--__--__*/
 
-  .social-links {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+/* __--__--__--__--__--PREVIEW--__--__--__--__--__*/
+.paper-preview {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
-.social-link {
-    display: block;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #f1f1f1;
-    margin: 0 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease;
+.preview-button {
+  display: block;
+  width: 20px;
+  height: 20px;
+  /* background-color: #f1f1f1; */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
-.social-link:hover {
-    background-color: #e1e1e1;
-}
-
-.social-link img {
-    width: 24px;
-    height: 24px;
+.preview-button:hover {
+  background-color: #e1e1e1;
 }
 
 /* __--__--__--__--__--BOOKMARK--__--__--__--__--__*/
-
-
-.bookmark-checkbox__input {
-  display: none;
-}
-
-.bookmark-checkbox__label {
-  cursor: pointer;
-}
-
-.bookmark-checkbox__icon {
-  width: 1.5em;
-  height: 1.5em;
-  fill: none;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: stroke 0.3s, fill 0.3s;
-}
-
-.bookmark-checkbox__icon-back {
-  stroke: #333;
-  transition: transform 0.3s;
-}
-
-.bookmark-checkbox__icon-check {
-  stroke: #fff;
-  stroke-dasharray: 16;
-  stroke-dashoffset: 16;
-  transition: stroke-dashoffset 0.3s, transform 0.3s;
-  transform: translateX(2px);
-}
-
-.bookmark-checkbox__input:checked
-  + .bookmark-checkbox__label
-  .bookmark-checkbox__icon {
-  fill: #ff5a5f;
-}
-
-.bookmark-checkbox__input:checked
-  + .bookmark-checkbox__label
-  .bookmark-checkbox__icon-back {
-  stroke: #ff5a5f;
-  transform: scale(1.1);
-  animation: bookmark-pop 0.4s ease;
-}
-
-.bookmark-checkbox__input:checked
-  + .bookmark-checkbox__label
-  .bookmark-checkbox__icon-check {
-  stroke-dashoffset: 0;
-  transition-delay: 0.2s;
-}
-
-@keyframes bookmark-pop {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1.1);
-  }
+.paper-container {
+  position: relative;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
 }
 
 .bookmark-checkbox {
   position: absolute;
-  top: 10px;
+  bottom: 10px;
   right: 10px;
-} 
-/*
+}
+
 .bookmark-checkbox__input {
   display: none;
 }
@@ -215,7 +150,7 @@ summary{
   display: block;
   width: 30px;
   height: 30px;
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -248,22 +183,22 @@ summary{
   stroke-dashoffset: 16;
   transition: stroke-dashoffset 0.3s, transform 0.3s;
   transform: translateX(2px);
-}*/
+}
 
 .bookmark-checkbox__input:checked + .bookmark-checkbox__label .bookmark-checkbox__icon {
   fill: #ff5a5f;
 }
+
 .bookmark-checkbox__input:checked + .bookmark-checkbox__label .bookmark-checkbox__icon-back {
   stroke: #ff5a5f;
   transform: scale(1.1);
   animation: bookmark-pop 0.4s ease;
-  }
-  
-  .bookmark-checkbox__input:checked + .bookmark-checkbox__label .bookmark-checkbox__icon-check {
-    stroke-dashoffset: 0;
-    transition-delay: 0.2s;
-    }
-    /*
+}
+
+.bookmark-checkbox__input:checked + .bookmark-checkbox__label .bookmark-checkbox__icon-check {
+  stroke-dashoffset: 0;
+  transition-delay: 0.2s;
+}
 
 @keyframes bookmark-pop {
   0% {
@@ -275,4 +210,35 @@ summary{
   100% {
     transform: scale(1.1);
   }
-} */
+}
+
+
+/* __--__--__--__--__--__SOCIAL__--__--__--__--__--__*/
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.social-link {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  margin: 0 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.social-link:hover {
+  background-color: #e1e1e1;
+}
+
+.social-link img {
+  width: 24px;
+  height: 24px;
+}

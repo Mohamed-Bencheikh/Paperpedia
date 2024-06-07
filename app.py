@@ -14,30 +14,9 @@ def display_latest_papers():
         results.extend(papers)
     for res in results:
         display_paper_card(res)
-        # st.markdown(
-        #     f"""
-        #     <hr>
-        #     <div class="paper-container">
-        #         <div class="paper-header" >
-        #             <h5><span class="emoji">📄</span> {res['title']}</h5>
-        #             <div class="paper-meta">
-        #                 <p><span class="emoji">✒️</span> {', '.join(res['authors'])}</p>
-        #                 <p><span class="emoji">📅</span> {res['date']}</p>
-        #                 <p><span class="emoji">🏷️</span> {', '.join(res['categories'])}</p>
-        #             </div>
-        #         </div>
-        #     </div>
-        #     """,
-        #     unsafe_allow_html=True
-        # )
-        btns = st.columns([.7,5.2])
-        with btns[0]:
-            # k = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
-            if st.button('Details', type='primary', key=res['url']):
+        if st.button('Details', type='primary', key=res['url']):
                 st.session_state.paper = res 
                 st.session_state.page = "details"       
-        with btns[1]:
-            st.link_button('View', url=res['url'])
             
 
 def display_search_results(query, top_k=5):
@@ -49,7 +28,11 @@ def display_search_results(query, top_k=5):
                 <div class="paper-header">
                     <h5><span class="emoji">📄</span> {res['title']}</h5>
                     <div class="paper-meta">
-                        <a href="{res['url']}"><span class="emoji">Open</span>
+                        <a href="{res['url']}"><span class="emoji"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <line x1="10" y1="14" x2="21" y2="3"></line>
+      </svg></span>
                     </div>
                 </div>""", unsafe_allow_html=True)
         
