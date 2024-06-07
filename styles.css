@@ -1,4 +1,4 @@
-[data-testid='stAppViewContainer'], [data-testid='stHeader']{
+[data-testid='stAppViewContainer']{
     /* background: linear-gradient(50deg, #fdb88d 0%, #ffeaba 60%, #ffffff 100%);  */
     color:#000000;
     /* https://wallpapertag.com/wallpaper/full/8/4/9/608783-cool-gothic-wallpapers-1920x1200-picture.jpg */
@@ -8,7 +8,19 @@
     background-position: center;
     background-size: cover;
 }
+[data-testid='stHeader']{
+    background-color: transparent;
+}
 
+[data-testid='stLogo']{
+    height: 2.8rem;
+}
+h1{
+    color: #0a416a;
+}
+.subheader{
+    color: #879095;
+}
 .home-list{
     margin-top: 50px;
     margin-bottom: 40px;
@@ -18,7 +30,6 @@
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
-    /* background: linear-gradient(50deg, #fdb88d 0%, #ffeaba 60%, #ffffff 100%); */
     background-image: url("https://jooinn.com/images/dotted-background-pattern-25.jpg");
 }
 
@@ -70,4 +81,146 @@
 summary{
     margin-bottom: 30px;
 }
-/* ################################# */
+/* ################################# HOME CARDS*/
+.notification {
+    display: flex;
+    flex-direction: column;
+    isolation: isolate;
+    position: relative;
+    width: 18rem;
+    height: 8rem;
+    background: #E5E5E5;
+    border-radius: 1rem;
+    overflow: hidden;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    --gradient: linear-gradient(to bottom, #2eadff, #3d83ff, #7e61ff);
+    --color: #32a6ff
+  }
+  
+  .notification:before {
+    position: absolute;
+    content: "";
+    inset: 0.0625rem;
+    border-radius: 0.9375rem;
+    background: #E5E5E5;
+    z-index: 2
+  }
+  
+  .notification:after {
+    position: absolute;
+    content: "";
+    width: 0.25rem;
+    inset: 0.65rem auto 0.65rem 0.5rem;
+    border-radius: 0.125rem;
+    background: var(--gradient);
+    transition: transform 300ms ease;
+    z-index: 4;
+  }
+  
+  .notification:hover:after {
+    transform: translateX(0.15rem)
+  }
+  
+  .notititle {
+    color: var(--color);
+    padding: 0.65rem 0.25rem 0.4rem 1.25rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: transform 300ms ease;
+    z-index: 5;
+  }
+  
+  .notification:hover .notititle {
+    transform: translateX(0.15rem)
+  }
+  
+  .notibody {
+    color: black;
+    font-weight: bold;
+    padding: 0 1.25rem;
+    transition: transform 300ms ease;
+    z-index: 5;
+  }
+  
+  .notification:hover .notibody {
+    transform: translateX(0.25rem)
+  }
+  
+  .notiglow,
+  .notiborderglow {
+    position: absolute;
+    width: 20rem;
+    height: 20rem;
+    transform: translate(-50%, -50%);
+    background: rgb(131,130,152);
+    background: linear-gradient(194deg, rgba(131,130,152,1) 0%, rgba(201,201,231,1) 51%, rgba(255,255,255,1) 100%);
+    /* background: radial-gradient(circle closest-side at center, white, transparent); */
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+  
+  .notiglow {
+    z-index: 3;
+  }
+  
+  .notiborderglow {
+    z-index: 1;
+  }
+  
+  .notification:hover .notiglow {
+    opacity: 0.1
+  }
+  
+  .notification:hover .notiborderglow {
+    opacity: 0.1
+  }
+  
+  .note {
+    color: var(--color);
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 0.9rem;
+    width: 75%;
+  }
+
+    .card {
+        display: flex;
+        /* justify-content: space-between; */
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+      } 
+
+/* ################################# SOCIAL*/
+
+  /* ----- */
+  .social-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.social-link {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    margin: 0 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.social-link:hover {
+    background-color: #e1e1e1;
+}
+
+.social-link img {
+    width: 24px;
+    height: 24px;
+}

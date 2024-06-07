@@ -1,5 +1,5 @@
 import streamlit as st
-from utils import return_back
+from utils import return_back, social
 
 def description():
     return_back()    
@@ -23,8 +23,7 @@ def description():
       
         Paperpedia is an open-source project, and we welcome contributions from the research community. If you're interested in contributing, please check our [GitHub repository](https://github.com/Mohamed-Bencheikh) for more information on how to get started.
 
-        ## Contact
-        For any inquiries or feedback, please feel free to reach out to us at [bencheikhmohamed811l@gmail.com](mailto:your-email@example.com).
+        
         
         ## Diagram
         """
@@ -36,3 +35,8 @@ def description():
         <iframe allowfullscreen frameborder="0" style="width:640px; height:480px" src="https://lucid.app/documents/embedded/c681383a-f2f7-479b-9be9-60e815525a2c" id="AF7CBCR5hu9B">
     </iframe></div>
     """, unsafe_allow_html=True)
+
+    st.markdown("""## Contact
+For any inquiries or feedback, please feel free to reach out to us at [bencheikhmohamed811l@gmail.com](mailto:your-email@example.com)
+                """)
+    social()

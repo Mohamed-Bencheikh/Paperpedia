@@ -1,11 +1,12 @@
 import streamlit as st
 from streamlit_card import card
+from utils import social
 def home():
         
-        st.markdown("<h5>A Recommender System for Research Papers</h5>", unsafe_allow_html=True)
+        st.markdown("<h5 class='subheader'>A Recommender System for Research Papers</h5>", unsafe_allow_html=True)
         body = st.columns([3.5, 2.5])
         with body[0]:
-                st.markdown("""
+                st.markdown(f"""
                 <div class="home-list">
                 <li><b>Get recommendations based on your preferences</li>
                 <li><b>Get relevant results for your search</li>
@@ -25,6 +26,9 @@ def home():
                                 st.rerun()
         with body[1]:
                 st.image("media/Publish article-rafiki.png", width=400)
+        
+        social()
+        
 
         
         

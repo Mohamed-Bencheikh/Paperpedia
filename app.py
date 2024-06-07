@@ -1,7 +1,7 @@
 # Streamlit app script
 import streamlit as st
 from streamlit_option_menu import option_menu
-from recommend import embed_query, get_latest_papers, get_relevant_passage, get_chat_response
+from recommend import get_latest_papers, get_relevant_passage, get_chat_response
 import database as db
 from datetime import datetime
 def display_latest_papers():
@@ -89,47 +89,49 @@ def display_history_recommendations():
             query = search['query']
             display_search_results(query, top_k=2)
 
+def display_sidebar():
+    with st.sidebar:
+        st.markdown(f"""
+        <img src="https://www.clipartmax.com/png/full/245-2459068_marco-martinangeli-coiffeur-portrait-of-a-man.png" alt="User Profile Picture" class="profile-pic"><b> {st.session_state.user['fullname']}</b>
+        """, unsafe_allow_html=True)
+        options = option_menu(None, ["Home", "Profile", "About", "Settings", "Logout"])
+        if options == "Profile":
+            st.session_state.page = "profile"
+            st.rerun()
+        elif options == "About":
+            st.session_state.page = "about"
+            st.rerun()
+        elif options == "Logout":
+            del st.session_state.user
+            st.session_state.page = "home"
+            st.rerun()
 def app():
-        cols = st.columns([1,4.5,1])
-        with cols[0]:
-            chat = st.toggle("Chat")
-        with cols[1]:
-            query = st.text_input('Search here', placeholder="Describe what you're looking for", label_visibility="collapsed")
-        with cols[2]:
-            btn = st.button('Search', type='primary')
-        with st.container():
-            if btn and query:
-                with st.spinner('Searching...'):
-                    # query_embeddings = embed_query(query).tolist()
-                    data = {"query": query, "timestamp": datetime.now()}
-                    db.push_query(st.session_state.user['email'], {'history':data})
-                    if chat:
-                        display_chat_response(query)
-                    else:
-                        display_search_results(query)
-            tabs = st.tabs(['Recommended', 'Latest', 'Trending'])
-            with tabs[0]:
-                # st.write("Recommended papers")
-                display_history_recommendations()
-            with tabs[1]:
-                display_latest_papers()
-            with tabs[2]:
-                st.write("Trending papers")
-            with st.sidebar:
-                st.markdown(f"""
-                <img src="https://www.clipartmax.com/png/full/245-2459068_marco-martinangeli-coiffeur-portrait-of-a-man.png" alt="User Profile Picture" class="profile-pic"><b> {st.session_state.user['fullname']}</b>
-                """, unsafe_allow_html=True)
-                options = option_menu(None, ["Home", "Profile", "About", "Settings", "Logout"])
-                if options == "Profile":
-                    st.session_state.page = "profile"
-                    st.rerun()
-                elif options == "About":
-                    st.session_state.page = "about"
-                    st.rerun()
-                elif options == "Logout":
-                    del st.session_state.user
-                    st.session_state.page = "home"
-                    st.rerun()
+    display_sidebar()
+    cols = st.columns([1,4.5,1])
+    with cols[0]:
+        chat = st.toggle("Chat")
+    with cols[1]:
+        query = st.text_input('Search here', placeholder="Describe what you're looking for", label_visibility="collapsed")
+    with cols[2]:
+        btn = st.button('Search', type='primary')
+    with st.container():
+        if btn and query:
+            with st.spinner('Searching...'):
+                data = {"query": query, "timestamp": datetime.now()}
+                db.push_query(st.session_state.user['email'], {'history':data})
+                if chat:
+                    display_chat_response(query)
+                else:
+                    display_search_results(query)
+        tabs = st.tabs(['Recommended', 'Latest', 'Trending'])
+        with tabs[0]:
+            # st.write("Recommended papers")
+            display_history_recommendations()
+        with tabs[1]:
+            display_latest_papers()
+        with tabs[2]:
+            st.write("Trending papers")
+            
 
 
 

@@ -10,7 +10,7 @@ from chat import display_chat
 st.set_page_config(page_title="Paperpedia", page_icon="media/image.png")
 # header = st.columns([1, 5])
 st.logo(image="media/image.png", icon_image="media/image.png")
-st.header("Paperpedia")
+st.title("Paperpedia")
 
 styles = "<style>"
 with open("styles.css") as f:
