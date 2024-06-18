@@ -14,6 +14,21 @@ pc = Pinecone(api_key=pc_api_key)
 index = pc.Index("papers")
 
 embed_query = lambda query: embedding_model.encode(query)
+
+def get_paper_by_id(paper_id):
+    # Create an arxiv client
+    client = arxiv.Client()
+    # Create a search object
+    search = arxiv.Search(id_list=[paper_id])
+
+    # Execute the search and retrieve the results
+    results = list(client.results(search))
+    # Check if results are found
+    if results:
+        return results[0]
+    else:
+        return None
+
 ## RELEVANT PASSAGE
 def get_relevant_passage(query, top_k=5):
     results = []
@@ -21,11 +36,14 @@ def get_relevant_passage(query, top_k=5):
     res = index.query(vector=q_emb, top_k=top_k, include_metadata=True).to_dict()
     ## get the titles and the urls
     for r in res['matches']:
-        title = r['metadata']['title']
-        url = r['metadata']['url']
-        results.append({'title': title, 'url': url})
+        # title = r['metadata']['title']
+        id = r['metadata']['url'].split('/')[-1]
+        paper = get_paper_by_id(id)
+        results.append(paper)
     return results 
-   
+
+
+
 def get_latest_papers(category, num_papers=5):
     search = arxiv.Search(
     query=category,
@@ -33,22 +51,8 @@ def get_latest_papers(category, num_papers=5):
     sort_by=arxiv.SortCriterion.SubmittedDate,
     sort_order=arxiv.SortOrder.Descending,
     )
-    results = list(search.results())
-    papers = []
-    for res in results:
-        papers.append({
-            "title": res.title,
-            "authors": [author.name for author in res.authors],
-            "date": res.published.strftime("%d-%m-%Y"),
-            "Id": res.entry_id,
-            "Doi": res.doi,
-            "abstract": res.summary,
-            "categories": res.categories,
-            "journal": res.journal_ref,
-            "comment": res.comment,
-            "url": res.pdf_url
-        })
-    return papers
+    results = list(search.results()) 
+    return results
 
 def make_prompt(query, relevant_passage):
   escaped = relevant_passage.replace("'", "").replace('"', "").replace("\n", " ")

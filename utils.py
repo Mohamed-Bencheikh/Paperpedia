@@ -20,13 +20,26 @@ def return_back():
                 else:
                     st.session_state.page = "home"
                 st.rerun()
+
 def display_paper_card(paper):
+     paper_info = {
+           "title": paper.title,
+            "authors": [author.name for author in paper.authors],
+            "date": paper.published.strftime("%d-%m-%Y"),
+            "Id": paper.entry_id,
+            "Doi": paper.doi,
+            "abstract": paper.summary,
+            "categories": paper.categories,
+            "journal": paper.journal_ref,
+            "comment": paper.comment,
+            "url": paper.pdf_url
+     }
      st.markdown(
             f"""
             <hr>
     <div class="paper-container">
     <div class="paper-preview">
-    <a href="{paper['url']}" class="preview-button" target="_blank">
+    <a href="{paper_info['url']}" class="preview-button" target="_blank">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
         <polyline points="15 3 21 3 21 9"></polyline>
@@ -51,11 +64,11 @@ def display_paper_card(paper):
     </label>
     </div>
     <div class="paper-header">
-        <h5><span class="emoji">📄</span> {paper['title']}</h5>
+        <h5><span class="emoji">📄</span> {paper_info['title']}</h5>
         <div class="paper-meta">
-        <p><span class="emoji">✒️</span> {', '.join(paper['authors'])}</p>
-        <p><span class="emoji">📅</span> {paper['date']}</p>
-        <p><span class="emoji">🏷️</span> {', '.join(paper['categories'])}</p>
+        <p><span class="emoji">✒️</span> {', '.join(paper_info['authors'])}</p>
+        <p><span class="emoji">📅</span> {paper_info['date']}</p>
+        <p><span class="emoji">🏷️</span> {', '.join(paper_info['categories'])}</p>
         </div>
     </div>
     </div>

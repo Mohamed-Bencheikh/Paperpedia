@@ -1,0 +1,110 @@
+.paper-container {
+  position: relative;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+}
+
+.bookmark-checkbox {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.bookmark-checkbox__input {
+  display: none;
+}
+
+.bookmark-checkbox__label {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: #f1f1f1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.bookmark-checkbox__label:hover {
+  background-color: #e1e1e1;
+}
+
+.bookmark-checkbox__icon {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: #333;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bookmark-checkbox__icon-back {
+  transition: transform 0.3s;
+}
+
+.bookmark-checkbox__icon-check {
+  stroke: #fff;
+  stroke-dasharray: 16;
+  stroke-dashoffset: 16;
+  transition: stroke-dashoffset 0.3s, transform 0.3s;
+  transform: translateX(2px);
+}
+
+.bookmark-checkbox__input:checked + .bookmark-checkbox__label .bookmark-checkbox__icon {
+  fill: #ff5a5f;
+}
+
+.bookmark-checkbox__input:checked + .bookmark-checkbox__label .bookmark-checkbox__icon-back {
+  stroke: #ff5a5f;
+  transform: scale(1.1);
+  animation: bookmark-pop 0.4s ease;
+}
+
+.bookmark-checkbox__input:checked + .bookmark-checkbox__label .bookmark-checkbox__icon-check {
+  stroke-dashoffset: 0;
+  transition-delay: 0.2s;
+}
+.paper-preview {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.preview-button {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: #f1f1f1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.preview-button:hover {
+  background-color: #e1e1e1;
+}
+
+.preview-button .emoji {
+  font-size: 16px;
+}
+
+@keyframes bookmark-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}

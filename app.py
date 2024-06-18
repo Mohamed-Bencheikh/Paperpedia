@@ -14,7 +14,7 @@ def display_latest_papers():
         results.extend(papers)
     for res in results:
         display_paper_card(res)
-        if st.button('Details', type='primary', key=res['url']):
+        if st.button('Details', type='primary', key=res.entry_id):
                 st.session_state.paper = res 
                 st.session_state.page = "details"       
             
@@ -22,20 +22,12 @@ def display_latest_papers():
 def display_search_results(query, top_k=5):
     results = get_relevant_passage(query, top_k=top_k)
     for res in results:
-        st.markdown(
-            f"""
-            <div class="paper-container">
-                <div class="paper-header">
-                    <h5><span class="emoji">📄</span> {res['title']}</h5>
-                    <div class="paper-meta">
-                        <a href="{res['url']}"><span class="emoji"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
-        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-        <polyline points="15 3 21 3 21 9"></polyline>
-        <line x1="10" y1="14" x2="21" y2="3"></line>
-      </svg></span>
-                    </div>
-                </div>""", unsafe_allow_html=True)
-        
+        display_paper_card(res)
+        # set the current time as key to avoid duplicate keys
+        ky = str(datetime.now())
+        if st.button('Details', type='primary', key=ky+res.entry_id):
+            st.session_state.paper = res 
+            st.session_state.page = "details"    
         
 def display_chat_response(query):
     with st.chat_message(name='user'):
